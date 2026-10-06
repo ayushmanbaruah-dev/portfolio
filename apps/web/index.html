@@ -1,17 +1,333 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Aayushman Baruah — AI/ML Engineer</title>
-    <meta name="description" content="Portfolio of Aayushman Baruah, AI/ML Engineer: search systems, ML pipelines and full-stack apps." />
-    <meta name="theme-color" content="#05080d" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono:wght@400&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet" />
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aayushman Baruah — AI/ML Engineer</title>
+<meta name="description" content="Portfolio of Aayushman Baruah, AI/ML engineer. Ask the voice assistant about my projects. Open to work worldwide, remote and freelance.">
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b0e14;--panel:#121722;--line:#2a2f3d;--text:#e6e9ef;--mute:#9aa3b5;--red:#e62429;--gold:#f5b301;--cyan:#7fdbff;--lvl:0}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font:16px/1.65 "IBM Plex Sans",system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3{font-family:Rajdhani,"Segoe UI",sans-serif;line-height:1.1}
+a{color:var(--cyan)}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+#glow{position:fixed;inset:0;pointer-events:none;background:radial-gradient(420px circle at var(--mx,50%) var(--my,30%),rgba(230,36,41,.10),transparent 70%);z-index:0}
+.wrap{max-width:980px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
+nav{position:sticky;top:0;z-index:5;background:rgba(11,14,20,.92);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;gap:22px;align-items:center;height:54px;overflow-x:auto;white-space:nowrap}
+nav b{font-family:Rajdhani,sans-serif;font-size:20px;color:var(--red);margin-right:auto}
+nav a{color:var(--mute);text-decoration:none;font-size:14px}
+nav a:hover,nav a.on{color:var(--text)}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:32px;align-items:center;padding:56px 0 72px;min-height:80vh}
+.hero h1{font-size:clamp(44px,8vw,84px)}
+.hero h1 span{color:var(--red)}
+.role{font-family:Rajdhani,sans-serif;font-size:clamp(20px,3vw,28px);color:var(--gold);margin:10px 0 18px;min-height:1.3em}
+.hero p{color:var(--mute);max-width:46ch}
+.btns{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.btn{font:500 15px "IBM Plex Sans",sans-serif;padding:11px 20px;border:1px solid var(--red);border-radius:4px;background:var(--red);color:#fff;text-decoration:none;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--text);border-color:var(--line)}
+.btn:hover{border-color:var(--gold)}
+.reactor{width:100%;max-width:380px;margin:0 auto;display:block;transition:transform .15s ease-out;cursor:pointer}
+.spin{transform-origin:200px 200px;animation:spin 40s linear infinite}
+.spin.r{animation-direction:reverse;animation-duration:28s}
+.core{transform-origin:200px 200px;transform:scale(calc(1 + var(--lvl)*.35));opacity:calc(.6 + var(--lvl)*.4)}
+@keyframes spin{to{transform:rotate(360deg)}}
+section{padding:64px 0;border-top:1px solid var(--line)}
+section h2{font-size:38px;margin-bottom:24px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:20px}
+.card{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--red);padding:24px;transition:transform .2s,border-color .2s}
+.card:hover{transform:translateY(-4px);border-color:var(--gold)}
+.card h3{font-size:26px;margin-bottom:8px}
+.card p{color:var(--mute);margin-bottom:14px}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;padding:0}
+.tags li{list-style:none;font-size:13px;padding:3px 10px;border:1px solid var(--line);border-radius:3px}
+.ask{font:inherit;font-size:14px;background:none;border:1px solid var(--line);color:var(--cyan);padding:6px 12px;border-radius:3px;cursor:pointer}
+.ask:hover{border-color:var(--cyan)}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:32px}
+.item{margin-bottom:22px}.item small{color:var(--gold);display:block}.item span{color:var(--mute)}
+dl dt{color:var(--gold);font-family:Rajdhani,sans-serif;font-size:19px;margin-top:14px}dl dd{color:var(--mute)}
+footer{padding:36px 0;border-top:1px solid var(--line);color:var(--mute);font-size:14px}
+/* assistant */
+#fab{position:fixed;right:20px;bottom:20px;z-index:20;display:flex;align-items:center;gap:10px;padding:12px 18px;border-radius:40px;border:1px solid var(--red);background:var(--panel);color:var(--text);font:500 15px "IBM Plex Sans",sans-serif;cursor:pointer;box-shadow:0 0 0 calc(var(--lvl)*14px) rgba(127,219,255,.18)}
+#fab i{width:12px;height:12px;border-radius:50%;background:var(--cyan)}
+#panel{position:fixed;right:20px;bottom:76px;z-index:20;width:min(380px,calc(100vw - 40px));max-height:70vh;display:none;flex-direction:column;background:var(--panel);border:1px solid var(--line);border-top:2px solid var(--red)}
+#panel.open{display:flex}
+#head{padding:12px 16px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;font-family:Rajdhani,sans-serif;font-size:19px}
+#head small{font:13px "IBM Plex Sans",sans-serif;color:var(--mute);align-self:center}
+canvas{width:100%;height:56px;display:block;border-bottom:1px solid var(--line)}
+#log{padding:14px 16px;overflow-y:auto;flex:1;font-size:14.5px;min-height:120px}
+.m{margin-bottom:12px}.m b{display:block;font-size:12px;color:var(--gold);font-weight:500}.m.u b{color:var(--cyan)}
+#chips{display:flex;flex-wrap:wrap;gap:6px;padding:0 16px 10px}
+#chips button{font:12.5px "IBM Plex Sans",sans-serif;background:none;border:1px solid var(--line);color:var(--mute);padding:4px 10px;border-radius:14px;cursor:pointer}
+#chips button:hover{color:var(--text);border-color:var(--red)}
+#bar{display:flex;gap:8px;padding:10px 12px;border-top:1px solid var(--line)}
+#bar input{flex:1;min-width:0;background:var(--bg);border:1px solid var(--line);color:var(--text);padding:9px 10px;border-radius:4px;font:inherit}
+#bar button{border:1px solid var(--line);background:none;color:var(--text);padding:0 12px;border-radius:4px;cursor:pointer;font:inherit}
+#mic.on{background:var(--red);border-color:var(--red)}
+#boot{position:fixed;inset:0;z-index:50;background:var(--bg);display:grid;place-items:center;font:15px "IBM Plex Sans",monospace;color:var(--cyan);transition:opacity .5s}
+#boot.off{opacity:0;pointer-events:none}
+@media(max-width:760px){.hero{grid-template-columns:1fr;padding-top:36px}.reactor{max-width:250px;order:-1}}
+@media(prefers-reduced-motion:reduce){.spin{animation:none}html{scroll-behavior:auto}#boot{display:none}}
+
+#prog{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--red),var(--gold));z-index:60}
+.marq{overflow:hidden;border-top:1px solid var(--line);padding:14px 0;color:var(--mute);font:500 20px Rajdhani,sans-serif;white-space:nowrap}
+.marq div{display:inline-block;animation:mq 40s linear infinite}
+@keyframes mq{to{transform:translateX(-50%)}}
+.rv{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+.rv.in{opacity:1;transform:none}
+dialog{margin:auto;width:min(480px,calc(100vw - 32px));background:var(--panel);color:var(--text);border:1px solid var(--line);border-top:2px solid var(--red);padding:0}
+dialog::backdrop{background:rgba(5,7,11,.75);backdrop-filter:blur(3px)}
+dialog form{padding:24px;display:grid;gap:14px}
+dialog h2{font-size:30px;margin:0}
+dialog p.s{color:var(--mute);font-size:14px;margin-top:-8px}
+dialog label{display:grid;gap:5px;font-size:14px;color:var(--mute)}
+dialog input,dialog select,dialog textarea{background:var(--bg);border:1px solid var(--line);color:var(--text);padding:10px;border-radius:4px;font:inherit}
+dialog textarea{min-height:110px;resize:vertical}
+.row{display:flex;flex-wrap:wrap;gap:10px}
+#hmsg{font-size:13px;color:var(--gold);min-height:18px}
+#hclose{position:absolute;right:12px;top:10px;background:none;border:0;color:var(--mute);font-size:24px;cursor:pointer}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none}.marq div{animation:none}}
+</style>
+</head>
+<body>
+<div id="prog"></div>
+<div id="boot"><div id="bootTxt"></div></div>
+<div id="glow"></div>
+<nav><div class="wrap"><b>AB</b><a href="#projects">Projects</a><a href="#skills">Skills</a><a href="#background">Background</a><a href="#contact">Contact</a><button class="btn" type="button" data-hire style="padding:6px 14px;font-size:14px">Hire me</button></div></nav>
+
+<main class="wrap">
+<header class="hero">
+  <div>
+    <h1>Aayushman <span>Baruah</span></h1>
+    <div class="role" id="role">AI/ML Engineer</div>
+    <p>I build machine learning systems: data pipelines, models and the applications around them. Open to full-time, remote and freelance work worldwide. Tap the reactor or the assistant button and ask me anything about my work.</p>
+    <div class="btns">
+      <button class="btn" id="heroAsk" type="button">Talk to my assistant</button>
+      <a class="btn ghost" href="#projects">See projects</a>
+      <a class="btn ghost" href="/Aayushman_Baruah_Resume.pdf" download>Download resume</a> <!-- NEW BUTTON ADDED HERE -->
+      <button class="btn ghost" type="button" data-hire>Hire me</button>
+    </div>
+  </div>
+  <svg class="reactor" id="reactor" viewBox="0 0 400 400" role="button" aria-label="Open voice assistant" tabindex="0">
+    <defs><radialGradient id="c"><stop offset="0" stop-color="#fff"/><stop offset=".4" stop-color="#7fdbff"/><stop offset="1" stop-color="#7fdbff" stop-opacity="0"/></radialGradient></defs>
+    <g class="spin"><circle cx="200" cy="200" r="185" fill="none" stroke="#e62429" stroke-width="2" stroke-dasharray="3 9"/></g>
+    <circle cx="200" cy="200" r="160" fill="none" stroke="#2a2f3d" stroke-width="2"/>
+    <g class="spin r"><circle cx="200" cy="200" r="140" fill="none" stroke="#f5b301" stroke-width="4" stroke-dasharray="90 40"/></g>
+    <g class="spin" stroke="#f5b301" stroke-width="10" opacity=".85"><line x1="200" y1="62" x2="200" y2="92"/><line x1="200" y1="308" x2="200" y2="338"/><line x1="62" y1="200" x2="92" y2="200"/><line x1="308" y1="200" x2="338" y2="200"/><line x1="103" y1="103" x2="124" y2="124"/><line x1="276" y1="276" x2="297" y2="297"/><line x1="297" y1="103" x2="276" y2="124"/><line x1="124" y1="276" x2="103" y2="297"/></g>
+    <circle cx="200" cy="200" r="88" fill="none" stroke="#7fdbff" stroke-width="2"/>
+    <circle cx="200" cy="200" r="66" fill="none" stroke="#e62429" stroke-width="2" stroke-dasharray="14 8"/>
+    <circle class="core" cx="200" cy="200" r="56" fill="url(#c)"/>
+    <polygon points="200,170 226,215 174,215" fill="none" stroke="#fff" stroke-width="2"/>
+  </svg>
+</header>
+
+<div class="marq" aria-hidden="true"><div>Python · PyTorch · TensorFlow · Keras · Scikit-Learn · XGBoost · OpenCV · FastAPI · Docker · Streamlit · SQL · Python · PyTorch · TensorFlow · Keras · Scikit-Learn · XGBoost · OpenCV · FastAPI · Docker · Streamlit · SQL · </div></div>
+
+<section id="projects">
+  <h2>Projects</h2>
+  <div class="grid">
+    <article class="card">
+      <h3>RansomwareWatch</h3>
+      <p>An end-to-end machine learning pipeline for ransomware detection on the CICIDS 2017 dataset. A PyTorch WCGAN-GP generates synthetic data, XGBoost classifies, and a Streamlit app shows SHAP-based explanations.</p>
+      <ul class="tags"><li>PyTorch</li><li>WCGAN-GP</li><li>XGBoost</li><li>SHAP</li><li>Streamlit</li><li>Docker</li></ul>
+      <a href="https://github.com/ayushmanbaruah-dev/ransomwarewatch">View code</a> &nbsp; <button class="ask" data-q="Tell me about the RansomwareWatch project">Ask about this</button>
+    </article>
+    <article class="card">
+      <h3>Thedu</h3>
+      <p>A lightweight, relevance-first local search engine with an inverted index and BM25 ranking, SQLite storage, a REST API and CLI, automated tests, CI and Docker.</p>
+      <ul class="tags"><li>BM25</li><li>Inverted index</li><li>SQLite</li><li>FastAPI</li><li>Docker</li><li>CI/CD</li></ul>
+      <a href="https://github.com/ayushmanbaruah-dev/THEDU">View code</a> &nbsp; <button class="ask" data-q="Tell me about the Thedu search engine">Ask about this</button>
+    </article>
+  </div>
+</section>
+
+<section id="skills">
+  <h2>Skills</h2>
+  <dl>
+    <dt>Languages</dt><dd>Python, SQL</dd>
+    <dt>Machine learning and AI</dt><dd>PyTorch, TensorFlow, Keras, Scikit-Learn, XGBoost, OpenCV, NumPy, Pandas</dd>
+    <dt>Backend and web</dt><dd>FastAPI, MERN stack</dd>
+    <dt>Tools and platforms</dt><dd>Docker, CI/CD, Git, Streamlit</dd>
+    <dt>Databases</dt><dd>SQLite</dd>
+  </dl>
+</section>
+
+<section id="background">
+  <h2>Background</h2>
+  <div class="two">
+    <div>
+      <div class="item"><small>Jul 2024 – Aug 2024</small><strong>Full Stack Web Development Intern, ARDENT</strong><br><span>Kolkata. Built features for a MERN-stack job portal: authentication, database operations and frontend-backend integration.</span></div>
+      <div class="item"><small>Sep 2021 – Jun 2025</small><strong>B.Tech, Computer Science Engineering (Data Science)</strong><br><span>MCKV Institute of Engineering, Howrah. GPA 7.01.</span></div>
+    </div>
+    <div><div class="item"><strong>Certifications</strong><br><span>Generative AI, Great Learning<br>Python, Udemy</span></div></div>
+  </div>
+</section>
+
+<section id="contact">
+  <h2>Contact</h2>
+  <p style="color:var(--mute);max-width:56ch;margin-bottom:20px">I'm looking for full-time and remote roles worldwide, and I take freelance projects. Email is the fastest way to reach me.</p>
+  <div class="btns">
+    <button class="btn" type="button" data-hire>Hire me or book freelance</button>
+    <a class="btn ghost" href="/Aayushman_Baruah_Resume.pdf" download>Download resume</a> <!-- NEW BUTTON ADDED HERE -->
+    <a class="btn ghost" href="mailto:aayushmanbaruah@aol.com">aayushmanbaruah@aol.com</a>
+    <a class="btn ghost" href="https://www.linkedin.com/in/aayushmaanbaruah/">LinkedIn</a>
+    <a class="btn ghost" href="https://github.com/ayushmanbaruah-dev">GitHub</a>
+  </div>
+</section>
+</main>
+<footer><div class="wrap">© <span id="yr"></span> Aayushman Baruah</div></footer>
+
+<dialog id="hire" aria-labelledby="ht">
+  <button id="hclose" type="button" aria-label="Close">&times;</button>
+  <form method="dialog" id="hform" novalidate>
+    <h2 id="ht">Hire me</h2>
+    <p class="s">Tell me about the role or project. The button below opens your own email with everything filled in, so you can review it before sending.</p>
+    <label>Your name<input id="hn" autocomplete="name" required></label>
+    <label>Your email<input id="he" type="email" autocomplete="email" required></label>
+    <label>What do you need?<select id="hk"><option>Full-time role</option><option>Remote role</option><option>Freelance project</option><option>Something else</option></select></label>
+    <label>Details<textarea id="hd" required placeholder="Company, role or project, timeline, budget"></textarea></label>
+    <div id="hmsg" role="status" aria-live="polite"></div>
+    <div class="row">
+      <button class="btn" type="button" id="hg">Open in Gmail</button>
+      <button class="btn ghost" type="button" id="hm">Other email app</button>
+      <button class="btn ghost" type="button" id="hc">Copy details</button>
+    </div>
+  </form>
+</dialog>
+<button id="fab" type="button" aria-expanded="false" aria-controls="panel"><i></i>Ask my assistant</button>
+<div id="panel" role="dialog" aria-label="Voice assistant">
+  <div id="head"><span>Assistant</span><small id="mode"></small></div>
+  <canvas id="wave" width="380" height="56"></canvas>
+  <div id="log" aria-live="polite"></div>
+  <div id="chips"></div>
+  <div id="bar"><button id="mic" type="button" aria-label="Speak">Mic</button><input id="in" placeholder="Type or press Mic" aria-label="Your question"><button id="send" type="button">Send</button></div>
+</div>
+
+<script>
+/* ===== CONFIG =====
+   Paste a Gemini API key from https://aistudio.google.com/apikey to enable Gemini answers and Gemini voice.
+   The key is visible to anyone who views this page's source, so restrict it to your site's domain
+   (HTTP referrers) and set a low quota in Google AI Studio / Cloud Console. Leave empty to run in free local mode. */
+const CONFIG={GEMINI_API_KEY:"",TEXT_MODEL:"gemini-2.5-flash",TTS_MODEL:"gemini-2.5-flash-preview-tts",VOICE:"Kore"};
+
+const FACTS=`Aayushman Baruah is an AI/ML engineer. Email: aayushmanbaruah@aol.com. He is open to full-time roles worldwide, remote roles worldwide, and freelance work.
+Education: B.Tech in Computer Science Engineering (Data Science), MCKV Institute of Engineering, Howrah, Sept 2021 to June 2025, GPA 7.01.
+Experience: Full Stack Web Development intern at ARDENT, Kolkata, July to August 2024. Built features for a MERN-stack job portal: user authentication, database operations, frontend-backend integration, debugging, testing and documentation.
+Skills: Python, SQL; FastAPI, Keras, PyTorch, TensorFlow, Scikit-Learn, XGBoost, OpenCV, NumPy, Pandas, MERN; Docker, CI/CD, Git, Streamlit; SQLite.
+Project RansomwareWatch: end-to-end ML pipeline for ransomware detection on the CICIDS 2017 dataset. PyTorch WCGAN-GP generates synthetic data, an XGBoost classifier detects, outputs include confusion matrices, ROC curves and PDF reports, a Streamlit app handles training and SHAP explanations, containerized with Docker.
+Project Thedu: lightweight relevance-first local search engine with deterministic tokenization, inverted index, BM25 ranking, SQLite storage, REST API and CLI, automated tests, CI workflows, Docker and documentation.
+Certifications: Generative AI (Great Learning), Python (Udemy). GitHub: ayushmanbaruah-dev. LinkedIn: aayushmaanbaruah.`;
+const SYS=`You are the voice assistant on Aayushman Baruah's portfolio, speaking about him in the third person. Answer in 1 to 3 short spoken sentences, plain text, no markdown. Use ONLY these facts; if something is not covered, say you don't have that detail and suggest emailing him.\n${FACTS}`;
+const CHIPS=["What projects has he built?","What are his skills?","Is he open to work?","How can I contact him?"];
+const LOCAL=[[/project|built|work on/,"He has built two main projects. RansomwareWatch is a machine learning pipeline for ransomware detection using a WCGAN-GP, XGBoost and SHAP explanations. Thedu is a local search engine with BM25 ranking and an inverted index."],[/ransom/,"RansomwareWatch detects ransomware on the CICIDS 2017 dataset. It uses a PyTorch WCGAN-GP for synthetic data, an XGBoost classifier, and a Streamlit app with SHAP explanations, packaged in Docker."],[/thedu|search/,"Thedu is a lightweight local search engine with deterministic tokenization, an inverted index, BM25 ranking, SQLite storage, a REST API and a CLI, with tests, CI and Docker."],[/skill|tech|stack|language/,"His skills include Python and SQL, PyTorch, TensorFlow, Keras, Scikit-Learn, XGBoost, OpenCV, FastAPI, Docker, Git and Streamlit."],[/open|hire|job|freelanc|available|remote/,"Yes. He is open to full-time roles worldwide, remote roles worldwide, and freelance projects."],[/contact|email|reach|linkedin/,"You can email him at aayushmanbaruah at aol dot com, or find him on LinkedIn and GitHub."],[/educat|study|college|degree|gpa/,"He completed a B.Tech in Computer Science with a Data Science specialization at MCKV Institute of Engineering, graduating in June 2025."],[/intern|experience/,"He interned at ARDENT in Kolkata in 2024, building features for a MERN-stack job portal."],[/hello|hi\b|who/,"Hi, I'm the assistant for Aayushman Baruah, an AI and machine learning engineer. Ask me about his projects, skills, or availability."]];
+
+const $=id=>document.getElementById(id);
+const root=document.documentElement.style;
+$('yr').textContent=new Date().getFullYear();
+const hasKey=!!CONFIG.GEMINI_API_KEY;
+$('mode').textContent=hasKey?'Gemini voice':'Local mode';
+
+/* boot sequence: once per load */
+(()=>{const l=["SYSTEM INITIALIZING...","LOADING PROFILE...","SYSTEM ONLINE"];let i=0;const t=$('bootTxt');
+ const n=()=>{if(i<l.length){t.textContent=l[i++];setTimeout(n,450)}else $('boot').classList.add('off')};n()})();
+
+/* role rotator */
+const roles=["AI/ML Engineer","Machine learning","Generative AI","Computer vision"];let ri=0;
+setInterval(()=>{ri=(ri+1)%roles.length;$('role').textContent=roles[ri]},2600);
+
+/* pointer glow + reactor parallax */
+addEventListener('pointermove',e=>{root.setProperty('--mx',e.clientX+'px');root.setProperty('--my',e.clientY+'px');
+ const r=$('reactor');r.style.transform=`translate(${(e.clientX/innerWidth-.5)*14}px,${(e.clientY/innerHeight-.5)*14}px)`});
+
+/* nav highlight */
+const links=[...document.querySelectorAll('nav a')];
+new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(a=>a.classList.toggle('on',a.hash==='#'+e.target.id))}),{rootMargin:'-45% 0px -50% 0px'}).observe&&
+document.querySelectorAll('section').forEach(s=>new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(a=>a.classList.toggle('on',a.hash==='#'+s.id))}),{rootMargin:'-45% 0px -50% 0px'}).observe(s));
+
+/* panel */
+const panel=$('panel');
+function toggle(open){panel.classList.toggle('open',open);$('fab').setAttribute('aria-expanded',open);if(open&&!$('log').children.length){say("Hi, I'm the assistant for Aayushman's portfolio. Type a question or press Mic and ask.",'a')}}
+$('fab').onclick=()=>toggle(!panel.classList.contains('open'));
+$('heroAsk').onclick=()=>toggle(true);
+$('reactor').onclick=()=>toggle(true);
+$('reactor').onkeydown=e=>{if(e.key==='Enter'||e.key===' ')toggle(true)};
+CHIPS.forEach(c=>{const b=document.createElement('button');b.textContent=c;b.onclick=()=>ask(c);$('chips').append(b)});
+document.querySelectorAll('.ask').forEach(b=>b.onclick=()=>{toggle(true);ask(b.dataset.q)});
+function say(t,who){const d=document.createElement('div');d.className='m '+(who==='u'?'u':'a');d.innerHTML='<b>'+(who==='u'?'You':'Assistant')+'</b>';d.append(document.createTextNode(t));$('log').append(d);$('log').scrollTop=1e9}
+
+/* audio + visualiser */
+let ctx,an,data=new Uint8Array(64),playing=false,src;
+function audio(){if(!ctx){ctx=new (window.AudioContext||window.webkitAudioContext)({sampleRate:24000});an=ctx.createAnalyser();an.fftSize=128;an.connect(ctx.destination)}if(ctx.state==='suspended')ctx.resume();return ctx}
+const cv=$('wave'),g=cv.getContext('2d');let fake=0;
+function frame(t){requestAnimationFrame(frame);g.clearRect(0,0,cv.width,cv.height);let lvl=0;
+ if(playing&&an&&src){an.getByteFrequencyData(data);lvl=data.reduce((a,b)=>a+b,0)/data.length/160}
+ else if(fake){lvl=.35+.25*Math.sin(t/90)}
+ root.setProperty('--lvl',Math.min(lvl,1).toFixed(2));
+ g.strokeStyle=fake||playing?'#7fdbff':'#2a2f3d';g.lineWidth=2;g.beginPath();
+ for(let x=0;x<cv.width;x+=4){const y=cv.height/2+Math.sin(x/18+t/220)*(2+lvl*22)*Math.sin(x/cv.width*Math.PI);x?g.lineTo(x,y):g.moveTo(x,y)}g.stroke()}
+requestAnimationFrame(frame);
+
+/* speech out */
+function b64pcm(b){const bin=atob(b),n=bin.length/2,f=new Float32Array(n);for(let i=0;i<n;i++){let v=bin.charCodeAt(2*i)|(bin.charCodeAt(2*i+1)<<8);if(v>=32768)v-=65536;f[i]=v/32768}return f}
+function stop(){speechSynthesis.cancel();try{src&&src.stop()}catch(e){}playing=false;fake=0}
+async function speak(text){
+ stop();
+ if(hasKey){try{
+  const r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${CONFIG.TTS_MODEL}:generateContent`,{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':CONFIG.GEMINI_API_KEY},
+   body:JSON.stringify({contents:[{parts:[{text:'Say in a clear, friendly, confident voice: '+text}]}],generationConfig:{responseModalities:['AUDIO'],speechConfig:{voiceConfig:{prebuiltVoiceConfig:{voiceName:CONFIG.VOICE}}}}})});
+  const j=await r.json();const p=j.candidates?.[0]?.content?.parts?.find(x=>x.inlineData);if(!p)throw new Error('no audio');
+  const f=b64pcm(p.inlineData.data),c=audio(),buf=c.createBuffer(1,f.length,24000);buf.copyToChannel(f,0);
+  src=c.createBufferSource();src.buffer=buf;src.connect(an);src.onended=()=>{playing=false};playing=true;src.start();return}catch(e){console.warn('Gemini voice failed, using browser voice',e)}}
+ if('speechSynthesis' in window){const u=new SpeechSynthesisUtterance(text);u.rate=.97;u.onstart=()=>fake=1;u.onend=u.onerror=()=>fake=0;speechSynthesis.speak(u)}
+}
+
+/* answer */
+const hist=[];
+async function reply(q){
+ if(hasKey){try{
+  hist.push({role:'user',parts:[{text:q}]});
+  const r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${CONFIG.TEXT_MODEL}:generateContent`,{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':CONFIG.GEMINI_API_KEY},body:JSON.stringify({systemInstruction:{parts:[{text:SYS}]},contents:hist.slice(-8)})});
+  const j=await r.json();const t=j.candidates?.[0]?.content?.parts?.map(p=>p.text).join('').trim();if(!t)throw new Error(JSON.stringify(j.error||j));
+  hist.push({role:'model',parts:[{text:t}]});return t}catch(e){console.warn('Gemini text failed, using local answers',e);hist.pop()}}
+ const m=LOCAL.find(([re])=>re.test(q.toLowerCase()));
+ return m?m[1]:"I don't have that detail. You can email him at aayushmanbaruah at aol dot com."}
+async function ask(q){q=q.trim();if(!q)return;toggle(true);say(q,'u');$('in').value='';const a=await reply(q);say(a,'a');speak(a)}
+$('send').onclick=()=>ask($('in').value);
+$('in').onkeydown=e=>{if(e.key==='Enter')ask($('in').value)};
+
+/* mic */
+const SR=window.SpeechRecognition||window.webkitSpeechRecognition;let rec;
+$('mic').onclick=()=>{
+ if(!SR){say('Voice input is not supported in this browser. Use Chrome or Edge, or type your question.','a');return}
+ if(rec){rec.stop();return}
+ stop();rec=new SR();rec.lang='en-US';rec.interimResults=false;
+ rec.onstart=()=>{$('mic').classList.add('on');fake=1};
+ rec.onresult=e=>{ask(e.results[0][0].transcript)};
+ rec.onerror=e=>say(e.error==='not-allowed'?'Microphone access was blocked. Allow it in your browser, or type instead.':'I could not hear that. Try again.','a');
+ rec.onend=()=>{$('mic').classList.remove('on');fake=0;rec=null};
+ rec.start()};
+
+/* ===== hire me ===== */
+const TO="aayushmanbaruah@aol.com",hd=$('hire');
+document.querySelectorAll('[data-hire]').forEach(b=>b.onclick=()=>{hd.showModal();$('hn').focus()});
+$('hclose').onclick=()=>hd.close();
+hd.addEventListener('click',e=>{if(e.target===hd)hd.close()});
+function hmail(){const n=$('hn').value.trim(),e=$('he').value.trim(),d=$('hd').value.trim(),k=$('hk').value,m=$('hmsg');
+ if(!n||!d){m.textContent='Add your name and details first.';return null}
+ if(e&&!/^\S+@\S+\.\S+$/.test(e)){m.textContent='That email address looks wrong.';return null}
+ m.textContent='';
+ return{su:`${k} enquiry from ${n}`,body:`Hi Aayushman,\n\n${d}\n\nType: ${k}\nName: ${n}\nReply to: ${e||'(not given)'}\n`}}
+$('hg').onclick=()=>{const x=hmail();if(x)window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=${TO}&su=${encodeURIComponent(x.su)}&body=${encodeURIComponent(x.body)}`,'_blank','noopener')};
+$('hm').onclick=()=>{const x=hmail();if(x)location.href=`mailto:${TO}?subject=${encodeURIComponent(x.su)}&body=${encodeURIComponent(x.body)}`};
+$('hc').onclick=async()=>{const x=hmail();if(!x)return;try{await navigator.clipboard.writeText(`To: ${TO}\nSubject: ${x.su}\n\n${x.body}`);$('hmsg').textContent='Copied. Paste it into any email app and send it to '+TO}catch(e){$('hmsg').textContent='Copy failed. Email '+TO+' directly.'}};
+
+/* ===== scroll progress + reveal ===== */
+addEventListener('scroll',()=>{$('prog').style.width=(scrollY/(document.documentElement.scrollHeight-innerHeight)*100)+'%'},{passive:true});
+const rvo=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');rvo.unobserve(e.target)}}),{threshold:.15});
+document.querySelectorAll('section h2,.card,.item,dl,#contact p,#contact .btns').forEach((el,i)=>{el.classList.add('rv');el.style.transitionDelay=(i%3)*80+'ms';rvo.observe(el)});
+</script>
+</body>
 </html>
