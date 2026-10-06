@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: portfolio-api
+    runtime: node
+    rootDir: apps/api
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - { key: GEMINI_API_KEY, sync: false }
+      - { key: RESEND_API_KEY, sync: false }
+      - { key: CONTACT_TO, sync: false }
+      - { key: CORS_ORIGIN, sync: false }
+      - { key: GEMINI_VOICE, value: Kore }
+  - type: web
+    name: portfolio-web
+    runtime: static
+    rootDir: apps/web
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    envVars:
+      - { key: VITE_API_URL, sync: false }
